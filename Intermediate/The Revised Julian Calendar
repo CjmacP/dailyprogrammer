@@ -1,0 +1,45 @@
+# https://www.reddit.com/r/dailyprogrammer/comments/b0nuoh/20190313_challenge_376_intermediate_the_revised/
+
+import time
+
+def leaps(year1, year2):
+    
+    start = time.time()
+    
+    add_year = year1
+    num_leaps = 0
+    
+    while True:
+        if add_year < year2:
+            
+            if (add_year%90000 == 20000 or add_year%90000 == 60000) and (add_year + 90000) < year2:
+                add_year += 90000
+                num_leaps += 21800
+                continue
+            
+            elif (add_year%9000 == 2000 or add_year%9000 == 6000) and (add_year + 9000) < year2:
+                add_year += 9000
+                num_leaps += 2180
+                continue
+            
+            elif (add_year%900 == 200 or add_year%900 == 600) and (add_year + 900) < year2:
+                add_year += 900
+                num_leaps += 218
+                continue
+                
+            elif (add_year%100 != 0 and add_year%4 == 0) or (add_year%900 == 200 or add_year%900 == 600):
+                add_year += 4
+                num_leaps += 1
+                continue
+                
+            else:
+                add_year += 1    
+        else:
+            break
+    print(num_leaps)
+
+    end = time.time()
+    time_taken = end - start
+    print('Time: ',time_taken)
+
+leaps(123456, 7891011)
