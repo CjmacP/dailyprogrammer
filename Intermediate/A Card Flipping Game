@@ -1,0 +1,96 @@
+# https://www.reddit.com/r/dailyprogrammer/comments/aq6gfy/20190213_challenge_375_intermediate_a_card/
+
+'''
+
+Sample Inputs
+
+0100110
+01001100111
+100001100101000
+
+'''
+
+def flip_card():
+    
+    deck = [int(i) for i in input()]
+    order_count = []
+    def check_deck(deck):
+        for j,i in enumerate(deck):
+            if i == 1:
+                deck[j] = '.'
+                if j > 0 and j < len(deck)-1:
+                    if deck[j-1] == 1 and deck[j+1] == 1:
+                        deck[j-1] = 0
+                        deck[j+1] = 0
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == 0 and deck[j+1] == 0:
+                        deck[j-1] = 1
+                        deck[j+1] = 1
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == 1 and deck[j+1] == 0:
+                        deck[j-1] = 0
+                        deck[j+1] = 1
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == 0 and deck[j+1] == 1:
+                        deck[j-1] = 1
+                        deck[j+1] = 0
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == '.' and deck[j+1] == 0:
+                        deck[j+1] = 1
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == '.' and deck[j+1] == 1:
+                        deck[j+1] = 0
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == 1 and deck[j+1] == '.':
+                        deck[j-1] = 0
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == 0 and deck[j+1] == '.':
+                        deck[j-1] = 1
+                        order_count.append(j)
+                        check_deck(deck)
+                    else:
+                        order_count.append(j)
+                        continue
+                elif j == 0:
+                    if deck[j+1] == 1:
+                        deck[j+1] = 0
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j+1] == 0:
+                        deck[j+1] = 1
+                        order_count.append(j)
+                        check_deck(deck)
+                    else:
+                        order_count.append(j)
+                        continue
+                elif j == len(deck)-1:
+                    if deck[j-1] == 1:
+                        deck[j-1] = 0
+                        order_count.append(j)
+                        check_deck(deck)
+                    elif deck[j-1] == 0:
+                        deck[j-1] = 1
+                        order_count.append(j)
+                        check_deck(deck)
+                    else:
+                        order_count.append(j)
+                        continue    
+            else:
+                continue
+    check_deck(deck)
+    
+    if 0 in deck or 1 in deck:
+        print('No Solution')
+    else:
+        print(*deck)
+        print(*order_count)
+                    
+    
+flip_card()
