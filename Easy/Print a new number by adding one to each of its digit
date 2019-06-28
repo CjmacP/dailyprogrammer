@@ -1,0 +1,4 @@
+# https://www.reddit.com/r/dailyprogrammer/comments/aphavc/20190211_challenge_375_easy_print_a_new_number_by/
+
+num = str(input())
+print(int(''.join([str(int(i) + 1) for i in num])))
