@@ -20,7 +20,7 @@ def add_persis(num):    # Recursively
             
 add_persis(1234)
 
------------------------------------------
+# -----------------------------------------
 
 def add_persis(num):   # No strings
     times = 0
@@ -41,7 +41,7 @@ def add_persis(num):   # No strings
             
 add_persis(1234)
 
--------------------------------------------
+# -------------------------------------------
 
 def add_persis(num):    # while loop
     global times
